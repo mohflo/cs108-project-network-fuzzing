@@ -13,7 +13,7 @@ The tool works exclusively with applications that are started with the following
 
 The tool can be launched with the following command:
 
-    java -jar network-fuzzing-too.jar game.jar gameConfig.jar
+    java -jar network-fuzzing-too.jar game.jar gameConfig.json
 
 It will then run a series of tests, restarting game client and game server for each test. All communication and events are logged.
 
