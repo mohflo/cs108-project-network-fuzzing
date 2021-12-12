@@ -1,0 +1,72 @@
+{
+  "gameServerPort" : 8880,
+  "testToolPort" : 8990,
+  "protocolSeparator" : "%",
+  "commands" : ["GIVGL", "UPDAT", "CHATO"],
+  "ignoreCommands" : false,
+  "specialCharacters" : ["😜", "\n", "👀", "\r"],
+  "printLog" : true,
+  "logModeCSV" : false,
+  "tests" : [
+    {
+      "testName" : "Relay",
+      "isEnabled" : true,
+      "duration" : 20,
+      "value" : "0"
+    },
+    {
+      "testName" : "Delay",
+      "isEnabled" : true,
+      "duration" : 20,
+      "value" : "5"
+    },
+    {
+      "testName" : "Drop",
+      "isEnabled" : true,
+      "duration" : 20,
+      "value" : "0"
+    },
+    {
+      "testName" : "Repeat",
+      "isEnabled" : true,
+      "duration" : 20,
+      "value" : "2"
+    },
+    {
+      "testName" : "TransformPartial",
+      "isEnabled" : true,
+      "duration" : 20,
+      "value" : "0"
+    },
+    {
+      "testName" : "DeletePartial",
+      "isEnabled" : true,
+      "duration" : 20,
+      "value" : "0"
+    },
+    {
+      "testName" : "ProtocolSeparators",
+      "isEnabled" : true,
+      "duration" : 20,
+      "value" : "0"
+    },
+    {
+      "testName" : "RandomString",
+      "isEnabled" : true,
+      "duration" : 20,
+      "value" : "10"
+    },
+    {
+      "testName" : "RandomBitString",
+      "isEnabled" : true,
+      "duration" : 20,
+      "value" : "10"
+    },
+    {
+      "testName" : "SpecialChars",
+      "isEnabled" : true,
+      "duration" : 20,
+      "value" : "10"
+    }
+  ]
+}
