@@ -8,6 +8,7 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.List;
+import java.util.Locale;
 
 /**
  *  Server class with main method.
@@ -34,6 +35,16 @@ public class Server {
             System.out.println("Invalid arguments. Please use the following syntax:");
             System.out.println("java -jar <network-fuzzing.jar> <game.jar> <gameConfig.jar>");
             return;
+        }
+
+        if (System.getProperty("os.name").toLowerCase(Locale.ROOT).contains("win")) {
+            System.out.println("Attention: This tool is currently not compatible with Windows.\n");
+            System.out.println("The first test will run normally, afterwards you will experience errors because the " +
+                    "game JARs cannot be shut down automatically.");
+            System.out.println("You can clean up the remaining running processes with" +
+                    " \"jps\" to find the process PID, followed by \"taskkill /pid <pid> /f\".");
+            System.out.println("\nThe tool will start in 5 seconds.");
+            Thread.sleep(5000);
         }
 
         // Check whether files exist
