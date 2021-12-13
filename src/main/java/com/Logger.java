@@ -9,6 +9,12 @@ import java.time.Instant;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 
+/**
+ *  Provides the logging functionality.
+ *  Creates a logfile with an index (increasing if the previous index already exists) and
+ *  writes activities into it.
+ *  Can be used in CSV mode to create a readable CSV file.
+ */
 public class Logger {
     private String filename;
     private final boolean printLog;
@@ -79,7 +85,7 @@ public class Logger {
 
     private String getTimestamp() {
         return DateTimeFormatter
-                .ofPattern("HH:mm:ss")
+                .ofPattern("HH:mm:ss.SSS")
                 .withZone(ZoneOffset.of("+01:00"))
                 .format(Instant.now());
     }
