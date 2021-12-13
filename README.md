@@ -58,7 +58,32 @@ The tool can be configured with a JSON config file of the following form:
 
 An example config is included in the resource folder.
 
-For more information about each test type please visit the wiki page [Test Types](https://github.com/mohflo/cs108-project-network-fuzzing/wiki/Test-Types).
+## Test Types
+The following test types are currently available:
+
+**Note**: Here, `message` describes only the text strings containing the commands specified in `config.json`, 
+all other commands will be ignored and relayed normally.
+
+### Relay
+Relays the message without modification or delay.
+### Delay
+Relays the message after the delay specified in `test.value`.
+### Drop
+Drops the message.
+### Repeat
+Sends the message repeatedly. The number of repetitions is specified in `test.value`.
+### TransformPartial
+Transforms the message, replacing a random character.
+### DeletePartial
+Transforms the message, deleting a random character.
+### ProtocolSeparators
+Adds multiple protocol separators to the message. Protocol separators are specified in the config.
+### RandomString
+Relays the message and also sends a new message containing a random string. The length of the string is specified in the config.
+### RandomBitString
+Relays the message and also sends a new message containing a random bitstring. The length of the bitstring is specified in the config.
+### SpecialChars
+Relays the message, appending a random character of those specified in the config.
 
 ## FAQ
 
