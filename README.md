@@ -58,7 +58,7 @@ The tool can be configured with a JSON config file of the following form:
 
 An example config is included in the resource folder.
 
-For more information about each test type please visit the wiki page (Test Types)[https://github.com/mohflo/cs108-project-network-fuzzing/wiki/Test-Types].
+For more information about each test type please visit the wiki page [Test Types](https://github.com/mohflo/cs108-project-network-fuzzing/wiki/Test-Types).
 
 ## FAQ
 
