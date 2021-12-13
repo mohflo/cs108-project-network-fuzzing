@@ -6,6 +6,9 @@ import com.google.gson.reflect.TypeToken;
 import java.io.FileReader;
 import java.io.IOException;
 
+/**
+ *  Reads the JSON config file and creates the corresponding objects.
+ */
 public class Config {
 
     public static String readJsonFile(String filePath) {

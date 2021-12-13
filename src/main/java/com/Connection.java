@@ -10,7 +10,11 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 
-public class Client {
+/**
+ *  Connects to game server/client and processes the messages sent between them.
+ *  Launches the server/client threads for testing.
+ */
+public class Connection {
     private String testName;
     private Test test;
     Server server;
@@ -31,7 +35,7 @@ public class Client {
     private Run serverThread;
     private Run clientThread;
 
-    public Client(Socket socket, Server server, int gameServerPort, Logger logger, Test test, TestToolConfig configTest) throws IOException {
+    public Connection(Socket socket, Server server, int gameServerPort, Logger logger, Test test, TestToolConfig configTest) throws IOException {
         this.server = server;
         this.testName = "Test_" + test.getTestName();
         this.gameServerPort = gameServerPort;

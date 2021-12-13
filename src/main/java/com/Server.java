@@ -70,7 +70,7 @@ public class Server {
             }
 
             int testDuration = test.getDuration() * 1000;
-            Server server = new Server(gameClientPort, logger, testName);
+            Server server = new Server(gameClientPort, logger, testNameLog);
 
             // Starting JAR processes
             RunGame serverJAR = new RunGame(false, gameName, gameServerPort,
@@ -82,13 +82,13 @@ public class Server {
 
             logger.log(testNameLog, "Client", "Waiting for client connection.");
             Socket socket = server.accept();
-            Client client = new Client(socket, server, gameServerPort, logger, test, configTest);
+            Connection connection = new Connection(socket, server, gameServerPort, logger, test, configTest);
             logger.log(testNameLog, "Client", "Client connected.");
             logger.log(testNameLog, "General", "Started.");
 
             try {
-                client.socket = socket;
-                client.start();
+                connection.socket = socket;
+                connection.start();
             } catch (Exception e) {
                 System.out.println("Client error: " + e.getMessage());
             }
@@ -98,7 +98,7 @@ public class Server {
             logger.log(testNameLog, "General", "Test duration passed.");
 
             // Stop socket threads
-            client.cancel();
+            connection.cancel();
             logger.log(testNameLog, "General", "Sockets closed.");
 
             // Stop JAR processes

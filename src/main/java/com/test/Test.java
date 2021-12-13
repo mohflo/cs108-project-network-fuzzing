@@ -1,5 +1,8 @@
 package com.test;
 
+/**
+ *  Test object as specified in JSON config.
+ */
 public class Test {
 
     private String testName;

@@ -2,8 +2,10 @@ package com.test;
 
 import java.util.List;
 
+/**
+ *   TestToolConfig object as specified in JSON config.
+ */
 public class TestToolConfig {
-
     private int gameServerPort;
     private int testToolPort;
     private String protocolSeparator;

@@ -8,8 +8,14 @@ import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 import java.util.Random;
 
+/**
+ *  (Threaded) Class that runs the actual tests.
+ *  Incoming messages are picked up with receiveFromClient() / receiveFromServer(),
+ *  test actions are applied with checkAndExecuteTest(),
+ *  results are sent back with sendToClient() / sendToServer().
+ */
 public class Run extends Thread {
-    Client client;
+    Connection connection;
     boolean isClient;
     private final Test test;
     private final Logger logger;
@@ -27,9 +33,9 @@ public class Run extends Thread {
 
     private final String testNameLog;
 
-    public Run(Client client, boolean isClient, Test test, Logger logger, TestToolConfig configTest) {
+    public Run(Connection connection, boolean isClient, Test test, Logger logger, TestToolConfig configTest) {
         this.isClient = isClient;
-        this.client = client;
+        this.connection = connection;
         this.test = test;
         this.logger = logger;
         if (isClient) {
@@ -77,14 +83,14 @@ public class Run extends Thread {
     void processClient() {
         while (!interrupted()) {
             try {
-                String data = client.receiveFromClient();
+                String data = connection.receiveFromClient();
 
                 if (!data.isEmpty()) {
                     // Check whether to only modify commands or everything else
                     if ((!ignoreCommands && isCommand(data)) || (ignoreCommands && !isCommand(data))) {
                         data = checkAndExecuteTest(data);
                     }
-                    client.sendToServer(data);
+                    connection.sendToServer(data);
                 }
             } catch (IOException | InterruptedException e) {
                 //System.out.println("processClient error: " + e);
@@ -101,14 +107,14 @@ public class Run extends Thread {
     void processServer() {
         while (!interrupted()) {
             try {
-                String data = client.receiveFromServer();
+                String data = connection.receiveFromServer();
 
                 if (!data.isEmpty()) {
                     // Check whether to only modify commands or everything else
                     if ((!ignoreCommands && isCommand(data)) || (ignoreCommands && !isCommand(data))) {
                         data = checkAndExecuteTest(data);
                     }
-                    client.sendToClient(data);
+                    connection.sendToClient(data);
                 }
             } catch (IOException | InterruptedException e) {
                 //System.out.println("processServer error: " + e);
@@ -212,10 +218,10 @@ public class Run extends Thread {
                     "Repeating message " + message + " " + (times + 1) + " times.");
             for (int i = times; i > 0; i--) {
                 if (isClient) {
-                    client.sendToClient(message);
+                    connection.sendToClient(message);
                 }
                 else {
-                    client.sendToServer(message);
+                    connection.sendToServer(message);
                 }
             }
         }
@@ -293,10 +299,10 @@ public class Run extends Thread {
                 "Sending random string " + randomString);
 
         if (isClient) {
-            client.sendToClient(randomString);
+            connection.sendToClient(randomString);
         }
         else {
-            client.sendToServer(randomString);
+            connection.sendToServer(randomString);
         }
         return message;
     }
@@ -316,10 +322,10 @@ public class Run extends Thread {
                 "Sending random bitstring " + randomBitString);
 
         if (isClient) {
-            client.sendToClient(randomBitString);
+            connection.sendToClient(randomBitString);
         }
         else {
-            client.sendToServer(randomBitString);
+            connection.sendToServer(randomBitString);
         }
         return message;
     }
