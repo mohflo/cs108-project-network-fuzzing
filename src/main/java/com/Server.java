@@ -33,10 +33,11 @@ public class Server {
         // Checking main arguments
         if (args.length != 2) {
             System.out.println("Invalid arguments. Please use the following syntax:");
-            System.out.println("java -jar <network-fuzzing.jar> <game.jar> <gameConfig.jar>");
+            System.out.println("java -jar <network-fuzzing-tool.jar> <game.jar> <gameConfig.jar>");
             return;
         }
 
+        // Check if user is running Windows
         if (System.getProperty("os.name").toLowerCase(Locale.ROOT).contains("win")) {
             System.out.println("Attention: This tool is currently not compatible with Windows.\n");
             System.out.println("The first test will run normally, afterwards you will experience errors because the " +
