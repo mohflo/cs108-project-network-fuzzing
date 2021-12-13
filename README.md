@@ -17,7 +17,7 @@ The tool can be launched with the following command:
 
 It will then run a series of tests, restarting game client and game server for each test. All communication and events are logged.
 
-**NOTE**: The tool currently does not work on Windows. For further information, please check the FAQ.
+**NOTE**: The tool currently does not work on Windows. For further information, please check the FAQ below.
 
 ### Configuration
 The tool can be configured with a JSON config file of the following form:
