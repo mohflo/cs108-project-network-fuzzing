@@ -95,4 +95,6 @@ There are three steps involved:
 3.  Add the test in the config.
 
 ### Why does the tool not work on Windows?
-This is due to an issue with the `Process.destroy()` method. On Windows machines, this method only kills the `cmd.exe` process but the child processes, such as the launched game JARs, keep running. Launching the game JAR anew afterwards does not work because the specified server port will still be in use.
+This is due to an issue with the `Process.destroy()` method. On Windows machines, this method only kills the `cmd.exe` 
+process. The child processes, such as the launched game JARs, keep running. Launching the game JAR anew afterwards
+does not work because the specified server port will still be in use.
