@@ -154,17 +154,39 @@ public class Run extends Thread {
         String newMessage = "";
         try{
             switch (testName) {
-                case "Relay" -> newMessage = testRelay(message);
-                case "Delay" -> newMessage = testDelay(message);
-                case "Drop" -> newMessage = testDrop(message);
-                case "Repeat" -> newMessage = testRepeat(message);
-                case "TransformPartial" -> newMessage = testTransformPartial(message);
-                case "DeletePartial" -> newMessage = testDeletePartial(message);
-                case "ProtocolSeparators" -> newMessage = testProtocolSeparators(message);
-                case "RandomString" -> newMessage = testRandomString(message);
-                case "RandomBitString" -> newMessage = testRandomBitString(message);
-                case "SpecialChars" -> newMessage = testSpecialChars(message);
-                default -> newMessage = testRelay(message);
+                case "Relay":
+                    newMessage = testRelay(message);
+                    break;
+                case "Delay":
+                    newMessage = testDelay(message);
+                    break;
+                case "Drop":
+                    newMessage = testDrop(message);
+                    break;
+                case "Repeat":
+                    newMessage = testRepeat(message);
+                    break;
+                case "TransformPartial":
+                    newMessage = testTransformPartial(message);
+                    break;
+                case "DeletePartial":
+                    newMessage = testDeletePartial(message);
+                    break;
+                case "ProtocolSeparators":
+                    newMessage = testProtocolSeparators(message);
+                    break;
+                case "RandomString":
+                    newMessage = testRandomString(message);
+                    break;
+                case "RandomBitString":
+                    newMessage = testRandomBitString(message);
+                    break;
+                case "SpecialChars":
+                    newMessage = testSpecialChars(message);
+                    break;
+                default:
+                    newMessage = testRelay(message);
+                    break;
             }
         } catch (IOException e) {
             //e.printStackTrace();
@@ -270,6 +292,7 @@ public class Run extends Thread {
      * @return Message with multiple protocol separators added.
      */
     String testProtocolSeparators(String message) {
+        // TODO: Import from config
         int random = (int)(Math.random() * 10) + 1; // +1 for if random generated number is 0
         message = message + String.valueOf(protocolSeparator).repeat(Math.max(0, random));
         logger.log(testNameLog, clientOrServer,
