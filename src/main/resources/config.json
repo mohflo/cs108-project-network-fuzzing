@@ -5,6 +5,7 @@
   "commands" : ["GIVGL", "UPDAT", "CHATO"],
   "ignoreCommands" : false,
   "specialCharacters" : ["😜", "\n", "👀", "\r"],
+  "timeout": 5,
   "printLog" : true,
   "logModeCSV" : false,
   "tests" : [

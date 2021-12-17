@@ -30,8 +30,9 @@ public class Run extends Thread {
     // Config test data
     private final String testName;
     private final String testValue;
-
     private final String testNameLog;
+
+    private final int timeout;
 
     public Run(Connection connection, boolean isClient, Test test, Logger logger, TestToolConfig configTest) {
         this.isClient = isClient;
@@ -47,6 +48,7 @@ public class Run extends Thread {
         // Config main data
         this.testName = test.getTestName();
         this.testValue = test.getValue();
+        this.timeout = configTest.getTimeout() * 1000;
 
         // Config test data
         this.protocolSeparator = configTest.getProtocolSeparator();
@@ -81,11 +83,26 @@ public class Run extends Thread {
      * it to the game server.
      */
     void processClient() {
+        long timestamp = System.currentTimeMillis();
+        long timeoutMultiplier =  1;
+
         while (!interrupted()) {
             try {
                 String data = connection.receiveFromClient();
 
+                // Check for timeout and repeat warnings in intervals
+                long timeDiff = System.currentTimeMillis() - timestamp;
+                if (timeDiff >= timeout * timeoutMultiplier) {
+                    logger.log(testNameLog, "Warning",
+                            "Timeout: No new client messages since " + timeDiff/1000 + " sec.");
+                    timeoutMultiplier++;
+                }
+
                 if (!data.isEmpty()) {
+                    // Reset timeout
+                    timestamp = System.currentTimeMillis();
+                    timeoutMultiplier = 1;
+
                     // Check whether to only modify commands or everything else
                     if ((!ignoreCommands && isCommand(data)) || (ignoreCommands && !isCommand(data))) {
                         data = checkAndExecuteTest(data);
@@ -105,11 +122,26 @@ public class Run extends Thread {
      * it to the game client.
      */
     void processServer() {
+        long timestamp = System.currentTimeMillis();
+        long timeoutMultiplier =  1;
+
         while (!interrupted()) {
             try {
                 String data = connection.receiveFromServer();
 
+                // Check for timeout and repeat warnings in intervals
+                long timeDiff = System.currentTimeMillis() - timestamp;
+                if (timeDiff >= timeout * timeoutMultiplier) {
+                    logger.log(testNameLog, "Warning",
+                            "Timeout: No new server messages since " + timeDiff/1000 + " sec.");
+                    timeoutMultiplier++;
+                }
+
                 if (!data.isEmpty()) {
+                    // Reset timeout
+                    timestamp = System.currentTimeMillis();
+                    timeoutMultiplier = 1;
+
                     // Check whether to only modify commands or everything else
                     if ((!ignoreCommands && isCommand(data)) || (ignoreCommands && !isCommand(data))) {
                         data = checkAndExecuteTest(data);

@@ -12,6 +12,7 @@ public class TestToolConfig {
     private String[] commands;
     private boolean ignoreCommands;
     private String[] specialCharacters;
+    private int timeout;
     private boolean printLog;
     private boolean logModeCSV;
     private List<Test> tests;
@@ -55,6 +56,8 @@ public class TestToolConfig {
     public String[] getSpecialCharacters() {
         return specialCharacters;
     }
+
+    public int getTimeout() { return timeout; }
 
     public boolean isPrintLog() {
         return printLog;
