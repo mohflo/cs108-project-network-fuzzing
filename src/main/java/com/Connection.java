@@ -130,6 +130,7 @@ public class Connection {
 
             socket.close();
             socketToServer.close();
+            server.serverSocket.close();
 
         } catch (IOException e) {
             e.printStackTrace();
