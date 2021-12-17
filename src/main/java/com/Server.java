@@ -37,17 +37,6 @@ public class Server {
             return;
         }
 
-        // Check if user is running Windows
-        if (System.getProperty("os.name").toLowerCase(Locale.ROOT).contains("win")) {
-            System.out.println("Attention: This tool is currently not compatible with Windows.\n");
-            System.out.println("The first test will run normally, afterwards you will experience errors because the " +
-                    "game JARs cannot be shut down automatically.");
-            System.out.println("You can clean up the remaining running processes with" +
-                    " \"jps\" to find the process PID, followed by \"taskkill /pid <pid> /f\".");
-            System.out.println("\nThe tool will start in 5 seconds.");
-            Thread.sleep(5000);
-        }
-
         // Check whether files exist
         File game = new File(args[0]);
         File config = new File(args[1]);
@@ -117,7 +106,7 @@ public class Server {
             clientJAR.cancel();
             serverJAR.cancel();
 
-            Thread.sleep(500);
+            Thread.sleep(2000);
         }
     }
 }

@@ -6,8 +6,7 @@ import java.io.InputStreamReader;
 import java.util.Locale;
 
 /**
- * Runs the JAR file of the game.<br>
- * NOTE: Currently not compatible with Windows machines.
+ * Runs the JAR file of the game.
  */
 public class RunGame extends Thread {
     private final boolean isClient;
@@ -40,9 +39,11 @@ public class RunGame extends Thread {
 
         if (os.contains("win")) {
             if (isClient) {
-                command = new String[]{"cmd", "/c", "java", "-jar", gameName, "client", "localhost:" + clientPort};
+//                command = new String[]{"cmd", "/c", "java", "-jar", gameName, "client", "localhost:" + clientPort};
+                command = new String[]{"java", "-jar", gameName, "client", "localhost:" + clientPort};
             } else {
-                command = new String[]{"cmd", "/c", "java", "-jar", gameName, "server", String.valueOf(serverPort)};
+//                command = new String[]{"cmd", "/c", "java", "-jar", gameName, "server", String.valueOf(serverPort)};
+                command = new String[]{"java", "-jar", gameName, "server", String.valueOf(serverPort)};
             }
         } else if (os.contains("mac")) {
             if (isClient) {
@@ -94,8 +95,6 @@ public class RunGame extends Thread {
             }
         }
 
-        // End process. NOTE: This does not work correctly on Windows machines because destroy()
-        // only kills the cmd.exe and not its child processes!
         p.destroy();
         logger.log(testName, clientOrServer, "JAR process stopped.");
     }

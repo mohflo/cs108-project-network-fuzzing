@@ -17,8 +17,6 @@ The tool can be launched with the following command:
 
 It will then run a series of tests, restarting game client and game server for each test. All communication and events are logged.
 
-**NOTE**: The tool currently does not work on Windows. For further information, please check the FAQ below.
-
 ### Configuration
 The tool can be configured with a JSON config file of the following form:
 
@@ -85,16 +83,10 @@ Relays the message and also sends a new message containing a random bitstring. T
 ### SpecialChars
 Relays the message, appending a random character of those specified in the config.
 
-## FAQ
-
-### How can I add other tests?
+# How can I add other tests?
 The tool is built with the idea of making it as easy as possible to implement your own tests.
 There are three steps involved:
 1.  Create a new method in the `Run` class, implementing your own test logic.
 2.  Add the test name (String) and the method call to the switch statement in the `Run.checkAndExecuteTest()` method.
 3.  Add the test in the config.
 
-### Why does the tool not work on Windows?
-This is due to an issue with the `Process.destroy()` method. On Windows machines, this method only kills the `cmd.exe` 
-process. The child processes, such as the launched game JARs, keep running. Launching the game JAR anew afterwards
-does not work because the specified server port will still be in use.
