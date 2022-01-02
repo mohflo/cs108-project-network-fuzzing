@@ -27,6 +27,7 @@ The tool can be configured with a JSON config file of the following form:
       "commands" : ?String (e.g. ["GIVGL", "UPDAT", "CHATO"]),
       "ignoreCommands" : boolean (e.g. false),
       "specialCharacters" : ?String (e.g. ["😜", "\n", "👀", "\r"]),
+      "timeout" : Int (e.g. 5),
       "printLog" : boolean (e.g. true),
       "logModeCSV" : boolean (e.g. false),
       "tests" : ?TestObjects [
@@ -46,6 +47,7 @@ The tool can be configured with a JSON config file of the following form:
  - **commands**: Which commands to test. All other commands will be relayed without modification.
  - **ignoreCommands**: If true, reverses the way the commands are filtered,  ignoring the listed ones and modifying all others.
  - **specialCharacters**: What special characters to check in certain tests.
+ - **timeout**: Number of seconds of silence from either server or client required to issue a warning in the log.
  - **printLog**: If true, prints all logged data to the console.
  - **logModeCSV**: If true, logs the data in a CSV readable format.
  - **tests**: List of all configured tests.
